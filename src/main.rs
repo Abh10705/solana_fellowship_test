@@ -53,7 +53,7 @@ struct MessageVerifyRequest {
     pubkey: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]git remote set-url origin https://github.com/Abh10705/solana_fellowship_test.git
 struct MessageSignResponse {
     signature: String,
     public_key: String,
@@ -252,7 +252,7 @@ async fn main() -> std::io::Result<()> {
             .route("/token/create", web::post().to(handle_token_creation))
             .route("/token/mint", web::post().to(handle_token_mint))
     })
-    .bind("127.0.0.1:8080")?
+    .bind(("0.0.0.0", std::env::var("PORT").unwrap_or("8080".to_string()).parse().unwrap()))?
     .run()
     .await
 }
